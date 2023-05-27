@@ -37,4 +37,6 @@ for epoch in range(cfg.num_epochs):
         optimizer.step()
 
     if epoch % 10 == 0:
-        torch.save(model_text_cls.state_dict(), "")
+        torch.save(model_text_cls.state_dict(), "models/{}.pth".format(epoch))
+
+        
