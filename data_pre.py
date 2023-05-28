@@ -44,7 +44,7 @@ train_df["cutword"] = train_df.text.apply(chinese_pre)
 test_df["cutword"] = test_df.text.apply(chinese_pre)
 
 min_seq = 1
-top_n = 1000
+top_n = 10000
 UNK = "<UNK>"
 PAD = "<PAD>"
 voc_list = sorted([_ for _ in voc_dict.items() if _[1] > min_seq],
