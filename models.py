@@ -16,10 +16,7 @@ class Model(nn.Module):
                             dropout=config.dropout)
         self.maxpool = nn.MaxPool1d(config.pad_size)
         self.fc = nn.Linear(config.hidden_size * 2 + config.embed_size, config.num_classes)
-        # self.fc = nn.Linear(81792, config.num_classes)
         self.softmax = nn.Softmax(dim=1)
-        self.flatten = nn.Flatten()
-        # print(config.hidden_size * 2 + config.embed_size)
 
     def forward(self, x):
         embed = self.embeding(x)  # [batchsize, seqlen, embed_size]
@@ -28,9 +25,6 @@ class Model(nn.Module):
         out = F.relu(out)
         out = out.permute(0, 2, 1)
         out = self.maxpool(out).reshape(out.size()[0], -1)
-        # print(out.shape)
-        # out = self.flatten(out)
-        # print(out.shape)
         out = self.fc(out)
         out = self.softmax(out)
         return out
